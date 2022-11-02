@@ -1,7 +1,7 @@
 const pokemonList = document.getElementById('pokemonList')
 const loadMoreButton = document.getElementById('loadMoreButton')
 
-const maxRecords = 151
+const maxRecords = 1000
 const limit = 10
 let offset = 0;
 
@@ -15,16 +15,23 @@ function loadPokemonItens(offset, limit) {
                     <div class="detail">
                         <ol class="types">
                             ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
+                            <div class="detail-btn">
+                                <button type='button' 
+                                    onclick='showDetails("${pokemon.name}")'>
+                                    Details
+                                </button>
+                            </div>
                         </ol>
         
                         <img src="${pokemon.photo}"
                             alt="${pokemon.name}">
                     </div>
+                    
                 </li>  
             `).join('') 
         pokemonList.innerHTML += newHtml
     }) 
-}
+} 
 
 loadPokemonItens(offset, limit)
 
@@ -42,6 +49,36 @@ loadMoreButton.addEventListener('click', () => {
         loadPokemonItens(offset, limit)
     }
 })
+
+const modalToggle = () => {
+    document.getElementById('modal-overlay').classList.toggle('active');
+}
+
+// show details of a specific pokemon
+
+function showDetails(name) {
+    pokeApi.getPokemonByName(name)
+        .then((details) => {
+            const modal = document.getElementById('modal');
+
+            modal.removeAttribute('class');
+            modal.classList.add(details.type);
+
+            document.getElementById('modal-overlay').classList.add('active');
+            document.querySelector('#modal h2').innerHTML = details.name;            
+            document.querySelector('#modal #number').innerHTML = `#${details.number}`;
+
+            document.querySelector('#modal .details #abilities').innerHTML = `
+                Abilities: ${details.abilities.map((ability) => `${ability}`).join(', ')}
+            `;
+
+            document.querySelector('#modal img').src = details.photo;
+            document.querySelector('#modal .details #species').innerHTML = `Species: ${details.species}`;
+            document.querySelector('#modal .details #height').innerHTML = `Height: ${details.height}`;
+            document.querySelector('#modal .details #weight').innerHTML = `Weight: ${details.weight}`;
+        });
+}
+
 
 /*     const listItens = []
 

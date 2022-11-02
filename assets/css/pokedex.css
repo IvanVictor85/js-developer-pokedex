@@ -84,6 +84,10 @@
     margin: .5rem;
     padding: 1rem;
     border-radius: 1rem;
+    background-image: url(../img/card-bg.png);
+    background-position: 100% 100%;
+    background-size: 50%;
+    background-repeat: no-repeat;
 }
 
 .pokemon .number {
@@ -144,6 +148,28 @@
     background-color: #6c79db;
     border: none;
     border-radius: 1rem;
+}
+
+.pokemon .detail-btn {
+    margin-top: .5rem;
+    display: flex;
+    justify-content: baseline;
+}
+
+.pokemon button {
+    width: 4rem;
+    padding: .1rem;
+    font-size: .865rem;
+    background-color: #6c79db;
+    border-radius: 1rem;
+    color: #fff;
+    border: .12rem solid #000;
+    box-shadow: 3px 3px rgb(116 116 116);
+}
+
+.pokemon button:hover,
+.pagination button:hover {
+    filter: brightness(0.7);
 }
 
 @media screen and (min-width: 380px) {
