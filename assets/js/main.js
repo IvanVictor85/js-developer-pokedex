@@ -63,14 +63,18 @@ function showDetails(name) {
 
             modal.removeAttribute('class');
             modal.classList.add(details.type);
+            
 
             document.getElementById('modal-overlay').classList.add('active');
-            document.querySelector('#modal h2').innerHTML = details.name;            
-            document.querySelector('#modal #number').innerHTML = `#${details.number}`;
+            document.querySelector('#modal h2').innerHTML = details.name;
 
+            document.querySelector('#modal .types').innerHTML = `                
+                ${details.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}`;
+
+            document.querySelector('#modal #number').innerHTML = `#${details.number}`;
+            
             document.querySelector('#modal .details #abilities').innerHTML = `
-                Abilities: ${details.abilities.map((ability) => `${ability}`).join(', ')}
-            `;
+                Abilities: ${details.abilities.map((ability) => `${ability}`).join(', ')}`;
 
             document.querySelector('#modal img').src = details.photo;
             document.querySelector('#modal .details #species').innerHTML = `Species: ${details.species}`;
